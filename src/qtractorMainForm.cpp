@@ -1,7 +1,7 @@
 // qtractorMainForm.cpp
 //
 /****************************************************************************
-   Copyright (C) 2005-2022, rncbc aka Rui Nuno Capela. All rights reserved.
+   Copyright (C) 2005-2023, rncbc aka Rui Nuno Capela. All rights reserved.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -5159,6 +5159,8 @@ void qtractorMainForm::viewOptions (void)
 	const bool    bOldAudioMetroBus      = m_pOptions->bAudioMetroBus;
 	const bool    bOldAudioMetroAutoConnect = m_pOptions->bAudioMetroAutoConnect;
 	const unsigned long iOldAudioMetroOffset = m_pOptions->iAudioMetroOffset;
+	const int     iOldAudioCountInMode   = m_pOptions->iAudioCountInMode;
+	const int     iOldAudioCountInBeats  = m_pOptions->iAudioCountInBeats;
 	const bool    bOldMidiControlBus     = m_pOptions->bMidiControlBus;
 	const bool    bOldMidiMetronome      = m_pOptions->bMidiMetronome;
 	const int     iOldMetroChannel       = m_pOptions->iMetroChannel;
@@ -5339,6 +5341,8 @@ void qtractorMainForm::viewOptions (void)
 			(iOldAudioMetroOffset  != m_pOptions->iAudioMetroOffset)  ||
 			( bOldAudioMetroBus    && !m_pOptions->bAudioMetroBus)    ||
 			(!bOldAudioMetroBus    &&  m_pOptions->bAudioMetroBus)    ||
+			(iOldAudioCountInMode  != m_pOptions->iAudioCountInMode)  ||
+			(iOldAudioCountInBeats != m_pOptions->iAudioCountInBeats) ||
 			( bOldAudioMetroAutoConnect && !m_pOptions->bAudioMetroAutoConnect) ||
 			(!bOldAudioMetroAutoConnect &&  m_pOptions->bAudioMetroAutoConnect))
 			updateAudioMetronome();
@@ -7000,6 +7004,10 @@ void qtractorMainForm::updateAudioMetronome (void)
 		bAudioMetronome && m_pOptions->bAudioMetroBus);
 	pAudioEngine->setMetronome(
 		bAudioMetronome && m_ui.transportMetroAction->isChecked());
+
+	pAudioEngine->setCountInMode(
+		qtractorAudioEngine::CountInMode(m_pOptions->iAudioCountInMode));
+	pAudioEngine->setCountInBeats(m_pOptions->iAudioCountInBeats);
 }
 
 

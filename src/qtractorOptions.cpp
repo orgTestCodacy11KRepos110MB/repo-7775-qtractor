@@ -159,6 +159,8 @@ void qtractorOptions::loadOptions (void)
 	bAudioPlayerBus      = m_settings.value("/PlayerBus", false).toBool();
 	bAudioMetroBus       = m_settings.value("/MetroBus", false).toBool();
 	bAudioMetronome      = m_settings.value("/Metronome", false).toBool();
+	iAudioCountInMode    = m_settings.value("/CountInMode", 0).toInt();
+	iAudioCountInBeats   = m_settings.value("/CountInBeats", 4).toInt();
 	bAudioMasterAutoConnect = m_settings.value("/MasterAutoConnect", true).toBool();
 	bAudioPlayerAutoConnect = m_settings.value("/PlayerAutoConnect", true).toBool();
 	bAudioMetroAutoConnect = m_settings.value("/MetroAutoConnect", true).toBool();
@@ -469,6 +471,8 @@ void qtractorOptions::saveOptions (void)
 	m_settings.setValue("/PlayerBus", bAudioPlayerBus);
 	m_settings.setValue("/MetroBus", bAudioMetroBus);
 	m_settings.setValue("/Metronome", bAudioMetronome);
+	m_settings.setValue("/CountInMode", iAudioCountInMode);
+	m_settings.setValue("/CountInBeats", iAudioCountInBeats);
 	m_settings.setValue("/MasterAutoConnect", bAudioMasterAutoConnect);
 	m_settings.setValue("/PlayerAutoConnect", bAudioPlayerAutoConnect);
 	m_settings.setValue("/MetroAutoConnect", bAudioMetroAutoConnect);
